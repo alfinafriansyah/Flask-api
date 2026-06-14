@@ -2,6 +2,11 @@ def calculate_edas_alltime(movies: list) -> list:
     if not movies:
         return []
 
+    for m in movies:
+        m['popularity']   = float(m.get('popularity')   or 0)
+        m['rating']       = float(m.get('rating')        or 0)
+        m['rating_count'] = float(m.get('rating_count')  or 0)
+    
     weights = {
         'popularity':   0.50,
         'rating':       0.35,
@@ -44,12 +49,21 @@ def calculate_edas_alltime(movies: list) -> list:
 
     results.sort(key=lambda x: x['score'], reverse=True)
 
+    print("All Time Best Movies:")
+    for i, movie in enumerate(results[:10], start=1):
+        print(f"  {i:2}. ID {movie['id']}  |  score: {movie['score']:.4f}")
+
     return [r['id'] for r in results]
 
-def calculate_edas_bestbygenre(movies: list) -> list:
+def calculate_edas_bestbygenre(movies: list, genre_name: str = '') -> list:
     if not movies:
         return []
 
+    for m in movies:
+        m['popularity']   = float(m.get('popularity')   or 0)
+        m['rating']       = float(m.get('rating')        or 0)
+        m['rating_count'] = float(m.get('rating_count')  or 0)
+    
     weights = {
         'popularity':   0.35,
         'rating':       0.45,
@@ -86,10 +100,14 @@ def calculate_edas_bestbygenre(movies: list) -> list:
     max_sn = max(r['sn'] for r in results) or 1e-9
 
     for r in results:
-        nsp       = r['sp'] / max_sp
-        nsn       = 1 - (r['sn'] / max_sn)
+        nsp        = r['sp'] / max_sp
+        nsn        = 1 - (r['sn'] / max_sn)
         r['score'] = 0.5 * (nsp + nsn)
 
     results.sort(key=lambda x: x['score'], reverse=True)
+
+    print(f"Best Movies — Genre: {genre_name}" if genre_name else "Best Movies by Genre")
+    for i, movie in enumerate(results[:10], start=1):
+        print(f"  {i:2}. ID {movie['id']}  |  score: {movie['score']:.4f}")
 
     return [r['id'] for r in results]
