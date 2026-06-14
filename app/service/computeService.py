@@ -208,7 +208,7 @@ def newUserRecommendation(userGenres, userTastes, movies):
     )[:40]
     for id in recommendation_ids:
         score = movie_final_scores[id]
-        print(f'hasil rekomendasi: {id} score : {score}')
+        #print(f'hasil rekomendasi: {id} score : {score}')
     return recommendation_ids
 
 def exponentialMovingAverage(currentValue, array ):

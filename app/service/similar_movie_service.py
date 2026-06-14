@@ -131,9 +131,9 @@ def get_similar_movies(target_movie, movies):
     # TOP 10
     top_movies = recommendations[:10]
 
-    print("Similar Movies:")
-    for movie in top_movies:
-        print(f"  - {movie['id']}: {movie['final_score']}")
+    #print("Similar Movies:")
+    #for movie in top_movies:
+    #    print(f"  - {movie['id']}: {movie['final_score']}")
 
     # RETURN ID ONLY
     return [movie['id'] for movie in top_movies]

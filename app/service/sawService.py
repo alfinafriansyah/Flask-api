@@ -135,8 +135,8 @@ def calculate_saw_discover_test(user_input, movie_ids):
     
     # 2. Batasi hanya mengambil 100 item teratas menggunakan slicing [:100]
     top_100_scored = scored[:100]
-    print(f"cooc score: {cooc_lookup}")
-    print(f"Movie ID & score: {top_100_scored}")
+    #print(f"cooc score: {cooc_lookup}")
+    #print(f"Movie ID & score: {top_100_scored}")
     # 3. Kembalikan array berisi ID film saja
     return [m['id'] for m in top_100_scored]
 
